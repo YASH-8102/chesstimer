@@ -7,6 +7,7 @@ import {
   Animated,
   StatusBar,
   Easing,
+  AppState,
 } from "react-native";
 import Values from "../Assets/shortcut";
 import Pause from "../Assets/pause.svg";
@@ -89,6 +90,32 @@ export default function Chess({ route, navigation }) {
       setsecond(second);
     }
   };
+  const _handleAppStateChange = (nextAppState) => {
+    if (nextAppState.match(/inactive|background/) && mystat != 0) {
+      console.log(mystat);
+      clearTimeout(timerup);
+      clearTimeout(timerdown);
+      setisPause(true);
+      setpausevisible(false);
+      setresetvisible(true);
+      mystat == 1
+        ? settopText("Tap to resume")
+        : setbottomText("Tap to resume");
+      ShowTextAnim();
+      clearTimeout(timerup);
+      clearTimeout(timerdown);
+      setthemevisible(true);
+      setsettingvisible(true);
+    }
+  };
+
+  useEffect(() => {
+    AppState.addEventListener("change", _handleAppStateChange);
+
+    return () => {
+      AppState.removeEventListener("change", _handleAppStateChange);
+    };
+  }, [AppState.currentState, mystat]);
 
   useEffect(() => {
     if (timer === 1 && !isPause) {
@@ -402,32 +429,36 @@ export default function Chess({ route, navigation }) {
       <Animated.View
         style={[styles.middlecontainer, { transform: [{ translateY: pause }] }]}
       >
-        <View
-          style={{
-            borderRadius: 40,
-          }}
-        >
-          <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate("setting");
-              if (mystat != 0) {
-                setisPause(true);
-                setpausevisible(false);
-                setresetvisible(true);
-                mystat == 1
-                  ? settopText("Tap to resume")
-                  : setbottomText("Tap to resume");
-                ShowTextAnim();
-                clearTimeout(timerup);
-                clearTimeout(timerdown);
-              }
+        {settingvisible ? (
+          <View
+            style={{
+              borderRadius: 40,
             }}
           >
-            <View style={styles.themesubcontainer}>
-              {settingvisible ? <Setting width={75} height={75} /> : <></>}
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate("setting");
+                if (mystat != 0) {
+                  setisPause(true);
+                  setpausevisible(false);
+                  setresetvisible(true);
+                  mystat == 1
+                    ? settopText("Tap to resume")
+                    : setbottomText("Tap to resume");
+                  ShowTextAnim();
+                  clearTimeout(timerup);
+                  clearTimeout(timerdown);
+                }
+              }}
+            >
+              <View style={styles.themesubcontainer}>
+                <Setting width={75} height={75} />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        ) : (
+          <></>
+        )}
         <View
           style={{
             borderRadius: 40,
@@ -440,34 +471,39 @@ export default function Chess({ route, navigation }) {
             </View>
           </TouchableWithoutFeedback>
         </View>
-        <View
-          style={{
-            borderRadius: 40,
-          }}
-        >
-          <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate("theme", {
-                obj: activetheme,
-              });
-              if (mystat != 0) {
-                setisPause(true);
-                setpausevisible(false);
-                setresetvisible(true);
-                mystat == 1
-                  ? settopText("Tap to resume")
-                  : setbottomText("Tap to resume");
-                ShowTextAnim();
-                clearTimeout(timerup);
-                clearTimeout(timerdown);
-              }
+
+        {themevisible ? (
+          <View
+            style={{
+              borderRadius: 40,
             }}
           >
-            <View style={styles.settingsubcontainer}>
-              {themevisible ? <Theme width={75} height={75} /> : <></>}
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate("theme", {
+                  obj: activetheme,
+                });
+                if (mystat != 0) {
+                  setisPause(true);
+                  setpausevisible(false);
+                  setresetvisible(true);
+                  mystat == 1
+                    ? settopText("Tap to resume")
+                    : setbottomText("Tap to resume");
+                  ShowTextAnim();
+                  clearTimeout(timerup);
+                  clearTimeout(timerdown);
+                }
+              }}
+            >
+              <View style={styles.settingsubcontainer}>
+                <Theme width={75} height={75} />
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        ) : (
+          <></>
+        )}
       </Animated.View>
     </>
   );
