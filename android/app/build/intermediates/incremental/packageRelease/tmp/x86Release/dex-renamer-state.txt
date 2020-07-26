@@ -1,0 +1,4 @@
+#Sun Jul 26 17:03:27 IST 2020
+base.0=/home/yash/Documents/projects/chesstimer/android/app/build/intermediates/transforms/r8/release/0/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
