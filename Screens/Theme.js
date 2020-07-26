@@ -62,37 +62,37 @@ export default function Theme({ route, navigation }) {
     Theme1: {
       topcolor: "#ADEFD1",
       bottomcolor: "#00203F",
-      statuscolor: "rgba(173, 239, 209,0.5)",
+      statuscolor: "rgba(173, 239, 209,0.7)",
       id: "Theme1",
     },
     Theme2: {
       topcolor: "#F9D342",
       bottomcolor: "#292826",
-      statuscolor: "rgba(249, 211, 66,0.5)",
+      statuscolor: "rgba(249, 211, 66,0.7)",
       id: "Theme2",
     },
     Theme3: {
       topcolor: "#1B1B1B",
       bottomcolor: "#E1E1E1",
-      statuscolor: "rgba(27, 27, 27,0.5)",
+      statuscolor: "rgba(27, 27, 27,0.7)",
       id: "Theme3",
     },
     Theme4: {
       topcolor: "#ff4040",
       bottomcolor: "#1a2228",
-      statuscolor: "rgba(255, 64, 64,0.5)",
+      statuscolor: "rgba(255, 64, 64,0.7)",
       id: "Theme4",
     },
     Theme5: {
       topcolor: "#FBF8BE",
       bottomcolor: "#234E70",
-      statuscolor: "rgba(251, 248, 190,0.5)",
+      statuscolor: "rgba(251, 248, 190,0.7)",
       id: "Theme5",
     },
     Theme6: {
       topcolor: "#F2EDD7",
       bottomcolor: "#755139",
-      statuscolor: "rgba(242, 237, 215,0.5)",
+      statuscolor: "rgba(242, 237, 215,0.7)",
       id: "Theme6",
     },
   };
